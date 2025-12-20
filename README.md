@@ -1,73 +1,63 @@
-# React + TypeScript + Vite
+# Crypto Arb Dash
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based dashboard for cryptocurrency arbitrage opportunities. This application compares prices across multiple exchanges, analyzes price differences, and allows users to create or cancel orders directly.
 
-Currently, two official plugins are available:
+### Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* Features
+* Installation
+* Usage
+* Configuration
+* Technologies
+* Contact
 
-## React Compiler
+### Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* **Price Comparison:** Real-time comparison of cryptocurrency prices from various exchanges (e.g., Binance, WhiteBIT).
+* **Price Difference Analysis:** Identifies arbitrage opportunities by calculating and visualizing price spreads.
+* **Order Management:** Create, monitor, and cancel trading orders seamlessly.
+* **User-Friendly Dashboard:** Interactive UI with charts, alerts, and customizable views.
+* **API Integration:** Connects to exchange APIs for live data fetching.
 
-## Expanding the ESLint configuration
+### Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+To get started with the project locally:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. Clone the repository: git clone https://github.com/your-username/crypto-arb-dash.git
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+2. Navigate to the project directory: cd crypto-arb-dash
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+3. Install dependencies: `npm install` or `yarn install`
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Usage
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Run the development server: `npm run dev` or `yarn dev`
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Open http://localhost:5173 in your browser to view the app.
+
+For production build: `npm run build` or `yarn build`
+
+Preview the production build: `npm run preview` or `yarn preview`
+
+### Configuration
+
+* **Environment Variables:** Create a .env file in the root directory and add your API keys for exchanges (e.g., VITE_BINANCE_API_KEY=your_key).
+* **Supported Exchanges:** Currently supports Binance, and WhiteBIT. Add more in src/config/exchanges.js.
+* **Customization:** Adjust themes, charts, or alert thresholds in src/components/Settings.
+
+### Technologies
+
+Frontend: React
+Language: TypeScript
+Bundler: Vite
+State Management: Context API
+Charts: Recharts
+API Handling: Axios
+Styling: Tailwind CSS
+Testing: Jest and React Testing Library
+
+### Contact
+
+* Author: Andrii Chernov
+
+Thank you for checking out Crypto-Arb-Dash! If you find it useful, consider starring the repo ⭐.
