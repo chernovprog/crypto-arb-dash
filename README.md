@@ -7,7 +7,6 @@ A React-based dashboard for cryptocurrency arbitrage opportunities. This applica
 * Features
 * Installation
 * Usage
-* Configuration
 * Technologies
 * Contact
 
@@ -23,7 +22,7 @@ A React-based dashboard for cryptocurrency arbitrage opportunities. This applica
 
 To get started with the project locally:
 
-1. Clone the repository: git clone https://github.com/your-username/crypto-arb-dash.git
+1. Clone the repository: git clone https://github.com/chernovprog/crypto-arb-dash.git
 
 2. Navigate to the project directory: cd crypto-arb-dash
 
@@ -39,25 +38,19 @@ For production build: `npm run build` or `yarn build`
 
 Preview the production build: `npm run preview` or `yarn preview`
 
-### Configuration
-
-* **Environment Variables:** Create a .env file in the root directory and add your API keys for exchanges (e.g., VITE_BINANCE_API_KEY=your_key).
-* **Supported Exchanges:** Currently supports Binance, and WhiteBIT. Add more in src/config/exchanges.js.
-* **Customization:** Adjust themes, charts, or alert thresholds in src/components/Settings.
-
 ### Technologies
 
-Frontend: React
-Language: TypeScript
-Bundler: Vite
-State Management: Context API
-Charts: Recharts
-API Handling: Axios
-Styling: Tailwind CSS
-Testing: Jest and React Testing Library
+* **Frontend:** React
+* **Language:** TypeScript
+* **Bundler:** Vite
+* **State Management:** Context API
+* **Charts:** Recharts
+* **API Handling:** Axios
+* **Styling:** Tailwind CSS
+* **Testing:** Jest and React Testing Library
 
 ### Contact
 
-* Author: Andrii Chernov
+* **Author:** Andrii Chernov
 
-Thank you for checking out Crypto-Arb-Dash! If you find it useful, consider starring the repo ⭐.
+Thank you for checking out Crypto Arb Dash! If you find it useful, consider starring the repo ⭐.
