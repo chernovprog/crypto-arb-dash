@@ -46,7 +46,7 @@ Preview the production build: `npm run preview` or `yarn preview`
 * **State Management:** Context API
 * **Charts:** Recharts
 * **API Handling:** Axios
-* **Styling:** Tailwind CSS
+* **Styling:** Material UI
 * **Testing:** Jest and React Testing Library
 
 ### Contact
