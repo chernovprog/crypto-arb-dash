@@ -1,0 +1,38 @@
+import { usePriceStore } from "@/components/arbitrage/store/usePriceStore";
+
+import type { Ticker } from "@/types/market";
+
+class PriceBuffer {
+  private buffer: Record<string, Record<string, Ticker>> = {};
+  private isRunning: boolean = false;
+
+  public add(exchange: string, ticker: Ticker) {
+    if (!this.buffer[exchange]) this.buffer[exchange] = {};
+    this.buffer[exchange][ticker.symbol] = ticker;
+  }
+
+  public start() {
+    if (this.isRunning) return;
+    this.isRunning = true;
+    this.loop();
+  }
+
+  private loop = () => {
+    if (!this.isRunning) return;
+
+    const exchanges = Object.keys(this.buffer);
+    if (exchanges.length > 0) {
+      usePriceStore.getState().updateBulkPrices(this.buffer);
+      this.buffer = {};
+    }
+
+    requestAnimationFrame(this.loop);
+  };
+
+  public stop() {
+    this.isRunning = false;
+    this.buffer = {};
+  }
+}
+
+export const priceBuffer = new PriceBuffer();
