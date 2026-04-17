@@ -1,8 +1,10 @@
 import { AppBar, Box, Link, Stack, Toolbar } from "@mui/material";
+import { Link as RouterLink } from 'react-router-dom';
 
 import Logo from '@/assets/logo.svg?react';
 import HeaderActions from "@/components/header/hooks/HeaderActions";
 import NavLinks from "@/components/header/NavLinks";
+
 
 const Header = () => {
 
@@ -22,7 +24,12 @@ const Header = () => {
           }}
         >
           <Stack direction="row" alignItems="center" spacing={{ xs: 1, md: 4 }}>
-            <Link href="/" aria-label="Home">
+
+            <Link
+              component={RouterLink}
+              to="/"
+              aria-label="Home"
+            >
               <Box
                 component={Logo}
                 sx={{ height: 40, width: "auto", color: 'text.primary' }}
