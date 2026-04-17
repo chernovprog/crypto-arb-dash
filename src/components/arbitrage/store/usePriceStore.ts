@@ -1,11 +1,11 @@
 import { create } from 'zustand';
 import { immer } from "zustand/middleware/immer";
 
-import type { Ticker } from "@/types/market";
+import type { Ticker } from "@/types";
 
 interface CryptoState {
-  prices: Map<string, Map<string, Ticker>>;
-  updateBulkPrices: (updates: Record<string, Record<string, Ticker>>) => void;
+  prices: Map<string, Map<number, Ticker>>;
+  updateBulkPrices: (updates: Record<string, Record<number, Ticker>>) => void;
 }
 
 export const usePriceStore = create<CryptoState>()(
@@ -22,8 +22,21 @@ export const usePriceStore = create<CryptoState>()(
 
           const exchangeMap = state.prices.get(exchange)!;
 
-          Object.entries(coins).forEach(([symbol, ticker]) => {
-            exchangeMap.set(symbol, ticker);
+          Object.entries(coins).forEach(([currencyId, newTicker]) => {
+            const id = Number(currencyId);
+            const prevTicker = exchangeMap.get(id);
+
+            if (prevTicker) {
+              const prevPrice = parseFloat(prevTicker.price);
+              const currentPrice = parseFloat(newTicker.price);
+
+              newTicker.priceDirection = currentPrice > prevPrice
+                ? 'up'
+                : currentPrice < prevPrice ? 'down'
+                  : prevTicker.priceDirection;
+            }
+
+            exchangeMap.set(id, newTicker);
           });
         });
       }),

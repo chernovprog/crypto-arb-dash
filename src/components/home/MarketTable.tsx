@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
-import type { Coin } from "@/types/market";
+import type { Coin } from "@/types";
 
 const PriceChange = ({ value }: { value: number }) => {
   const isPositive = value >= 0;

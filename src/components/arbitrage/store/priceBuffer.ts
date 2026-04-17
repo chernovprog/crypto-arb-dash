@@ -1,14 +1,14 @@
 import { usePriceStore } from "@/components/arbitrage/store/usePriceStore";
 
-import type { Ticker } from "@/types/market";
+import type { Ticker } from "@/types";
 
 class PriceBuffer {
-  private buffer: Record<string, Record<string, Ticker>> = {};
+  private buffer: Record<string, Record<number, Ticker>> = {};
   private isRunning: boolean = false;
 
   public add(exchange: string, ticker: Ticker) {
     if (!this.buffer[exchange]) this.buffer[exchange] = {};
-    this.buffer[exchange][ticker.symbol] = ticker;
+    this.buffer[exchange][ticker.currencyId] = ticker;
   }
 
   public start() {

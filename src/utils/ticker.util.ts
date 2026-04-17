@@ -1,29 +1,9 @@
-export interface Coin {
-  symbol: string;
-  name: string;
-  price: number;
-  change24h: number;
-  marketCap?: string;
-}
-
-export interface TickerDto {
-  /** Symbol */
-  s: string;
-  /** Price */
-  p: string;
-  /** Timestamp */
-  t: number;
-}
-
-export interface Ticker {
-  symbol: string;
-  price: string;
-  timestamp: number;
-}
+import type { Ticker, TickerDto } from "@/types";
 
 export const mapTickerDtoToModel = (dto: TickerDto): Ticker => ({
-  symbol: dto.s,
+  currencyId: dto.id,
   price: dto.p,
+  priceDirection: undefined,
   timestamp: dto.t,
 });
 
@@ -35,7 +15,7 @@ export const isValidTicker = (data: unknown): data is TickerDto => {
   const d = data as Record<string, unknown>;
 
   return (
-    typeof d.s === 'string' && d.s.trim() !== '' &&
+    typeof d.id === 'number' && d.id >= 0 &&
     typeof d.p === 'string' && d.p.trim() !== '' &&
     typeof d.t === 'number'
   );
