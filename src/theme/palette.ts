@@ -15,6 +15,8 @@ export const colorSchemes = {
       text: {
         primary: neutral[800],
         secondary: neutral[600],
+        disabled: neutral[400],
+        hint: neutral[300],
       },
       background: {
         default: common.white,
@@ -34,6 +36,11 @@ export const colorSchemes = {
         light: red[400],
         dark: red[800],
         contrastText: common.white,
+      },
+      tableBorder: {
+        main: neutral[200],
+        light: neutral[100],
+        dark: neutral[300],
       },
       components: {
         buttonAction: {

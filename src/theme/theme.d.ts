@@ -22,6 +22,10 @@ declare module '@mui/material/IconButton' {
 
 declare module '@mui/material/styles' {
 
+  interface TypeText {
+    hint?: string;
+  }
+
   interface ButtonActionPalette {
     main: string;
     hover: string;
@@ -38,6 +42,12 @@ declare module '@mui/material/styles' {
     main: string;
     hover: string;
     contrastText: string;
+  }
+
+  interface TableBorder {
+    main: string;
+    light: string;
+    dark: string;
   }
 
   interface ScrollbarPalette {
@@ -58,6 +68,7 @@ declare module '@mui/material/styles' {
     };
     up: PaletteColor;
     down: PaletteColor;
+    tableBorder: TableBorder;
     scrollbar: ScrollbarPalette;
     footer: FooterPalette;
   }
@@ -71,6 +82,7 @@ declare module '@mui/material/styles' {
     };
     up?: SimplePaletteColorOptions;
     down?: SimplePaletteColorOptions;
+    tableBorder?: Partial<TableBorder>;
     scrollbar?: Partial<ScrollbarPalette>;
     footer?: Partial<FooterPalette>;
   }
