@@ -7,7 +7,7 @@ import { typography } from './typography';
 
 export const theme = createTheme({
   cssVariables: {
-    colorSchemeSelector: 'data',
+    colorSchemeSelector: 'data-mui-color-scheme',
   },
   colorSchemes,
   typography,
