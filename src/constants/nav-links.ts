@@ -5,7 +5,7 @@ export interface NavLinkItem {
 
 export const NAV_LINKS: NavLinkItem[] = [
   { label: 'Markets', href: '/markets' },
-  { label: 'Triangular arbitrage', href: '/triangular-arbitrage' },
+  { label: 'Arbitrage', href: '/arbitrage' },
 ];
 
 export const MORE_LINKS: NavLinkItem[] = [
