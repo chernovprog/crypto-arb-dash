@@ -14,7 +14,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setUser(response.data);
     } catch {
       setUser(null);
-      throw new Error('Authentication failed');
     } finally {
       setIsLoading(false);
     }
