@@ -1,4 +1,8 @@
-import axios, { type AxiosInstance } from 'axios'
+import axios, { type AxiosInstance, type InternalAxiosRequestConfig } from 'axios'
+
+interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
+  _retry?: boolean;
+}
 
 interface FailedRequest {
   resolve: () => void;
@@ -34,7 +38,7 @@ function addAuthInterceptors(client: AxiosInstance, redirectToLogin: boolean) {
   client.interceptors.response.use(
     (response) => response,
     async (error) => {
-      const originalRequest = error.config;
+      const originalRequest = error.config as CustomAxiosRequestConfig;
 
       if (error.response?.status === 401 && !originalRequest._retry) {
 

@@ -11,7 +11,7 @@ export interface Credentials {
   password: string;
 }
 
-export interface ForgotPasswordData {
+export interface ResetPasswordData {
   email: string;
 }
 
@@ -22,7 +22,7 @@ type AuthContextType = {
   login: (credentials: Credentials) => Promise<void>;
   signup: (credentials: Credentials) => Promise<void>;
   logout: () => Promise<void>;
-  forgotPassword: (data: ForgotPasswordData) => Promise<void>;
+  resetPassword: (data: ResetPasswordData) => Promise<void>;
 };
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);

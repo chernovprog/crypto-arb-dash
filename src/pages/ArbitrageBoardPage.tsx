@@ -15,22 +15,16 @@ import {
 import ExchangeSubscriber from "@/components/arbitrage/ExchangeSubscriber";
 import PriceCell from "@/components/arbitrage/PriceCell";
 import stompClient from "@/services/stompClient";
-import { useArbitrageBoardConfigStore } from "@/store/useArbitrageBoardConfigStore";
+import { useAppMetadataStore } from "@/store/useAppMetadataStore";
 
 const ArbitrageBoardPage = () => {
   const [isConnected, setIsConnected] = useState(stompClient.connected)
 
   const {
-    isLoading,
-    fetchMetadata,
     exchangeSubscriptions,
     currencySubscriptions,
     tradingPairSubscriptions
-  } = useArbitrageBoardConfigStore();
-
-  useEffect(() => {
-    fetchMetadata(['exchange-subscriptions', 'trading-pair-subscriptions', 'currency_subscriptions']);
-  }, [fetchMetadata]);
+  } = useAppMetadataStore();
 
   useEffect(() => {
     const handleConnect = () => setIsConnected(true);
@@ -47,10 +41,6 @@ const ArbitrageBoardPage = () => {
       stompClient.deactivate();
     };
   }, []);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <Container maxWidth="lg" sx={{ my: { xs: 2, sm: 4, md: 6 } }}>

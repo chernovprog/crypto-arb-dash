@@ -106,7 +106,7 @@ const LoginPage = () => {
           Don't have an account?
         </Link>
 
-        <Link component={RouterLink} to="/forgot-password">
+        <Link component={RouterLink} to="/reset-password">
           Forgot your password?
         </Link>
       </Stack>

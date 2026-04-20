@@ -8,13 +8,13 @@ import { useAuth } from "@/providers/Auth/context";
 
 import type { AxiosError } from "axios";
 
-const ForgotPasswordPage = () => {
+const ResetPasswordPage = () => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
-  const { forgotPassword } = useAuth();
+  const { resetPassword } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,7 +23,7 @@ const ForgotPasswordPage = () => {
     setLoading(true);
 
     try {
-      await forgotPassword({ email });
+      await resetPassword({ email });
       setSuccess(true);
     } catch (err) {
       const axiosError = err as AxiosError<{ message?: string }>;
@@ -102,4 +102,4 @@ const ForgotPasswordPage = () => {
   );
 };
 
-export default ForgotPasswordPage;
+export default ResetPasswordPage;

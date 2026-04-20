@@ -1,55 +1,52 @@
-import { type ReactNode, useEffect, useState } from "react";
+import { type ReactNode } from "react";
 
-import { publicApi, silentApi } from "@/lib/axios";
-import { AuthContext, type Credentials, type ForgotPasswordData, type User } from "@/providers/Auth/context";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
+import { authService } from "@/api/services/authService";
+import { AuthContext } from "@/providers/Auth/context";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const queryClient = useQueryClient();
 
-  const checkAuth = async () => {
-    try {
-      setIsLoading(true);
-      const response = await silentApi.get('/auth/me');
-      setUser(response.data);
-    } catch {
-      setUser(null);
-    } finally {
-      setIsLoading(false);
+  const {
+    data: user,
+    isLoading
+  } = useQuery({
+    queryKey: ['auth-user'],
+    queryFn: authService.getMe,
+    retry: false,
+    staleTime: Infinity,
+  });
+
+  const loginMutation = useMutation({
+    mutationFn: authService.login,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['auth-user'] });
     }
-  }
+  });
 
-  useEffect(() => {
-    void checkAuth();
-  }, []);
+  const logoutMutation = useMutation({
+    mutationFn: authService.logout,
+    onSuccess: () => {
+      queryClient.setQueryData(['auth-user'], null);
+    }
+  });
 
-  const login = async (credentials: Credentials) => {
-    await publicApi.post('/auth/login', credentials);
-    await checkAuth();
-  };
-
-  const signup = async (credentials: Credentials) => {
-    await publicApi.post('/auth/signup', credentials);
-    await checkAuth();
-  }
-
-  const logout = async () => {
-    await publicApi.post('/auth/logout');
-    setUser(null);
-  };
-
-  const forgotPassword = async (data: ForgotPasswordData) => {
-    await publicApi.post('/auth/forgot-password', data);
-  };
+  const signupMutation = useMutation({
+    mutationFn: authService.signup,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['auth-user'] });
+    }
+  });
 
   const value = {
-    user,
+    user: user ?? null,
     isAuthenticated: !!user,
-    isLoading,
-    login,
-    signup,
-    logout,
-    forgotPassword,
+    isLoading: isLoading || loginMutation.isPending || logoutMutation.isPending,
+    login: loginMutation.mutateAsync,
+    signup: signupMutation.mutateAsync,
+    logout: logoutMutation.mutateAsync,
+    resetPassword: authService.resetPassword,
   };
 
   return (
