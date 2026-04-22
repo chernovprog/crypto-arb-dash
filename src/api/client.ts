@@ -1,5 +1,7 @@
 import axios, { type AxiosInstance, type InternalAxiosRequestConfig } from 'axios'
 
+import { API_ROUTES } from "@/api/endpoints";
+
 interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
   _retry?: boolean;
 }
@@ -54,7 +56,7 @@ function addAuthInterceptors(client: AxiosInstance, redirectToLogin: boolean) {
         isRefreshing = true;
 
         try {
-          await refreshApi.post('/auth/refresh');
+          await refreshApi.post(API_ROUTES.AUTH.REFRESH);
 
           processQueue(null);
 
