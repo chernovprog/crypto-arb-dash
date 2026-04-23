@@ -27,6 +27,7 @@ const MaxSpread = ({ baseCurrencyId }: MaxSpreadProps) => {
         component="span"
         variant="body2"
         fontWeight="medium"
+        color="up.main"
       >
         {formatCryptoPrice(percentage, 2, 2)}%
       </Typography>
