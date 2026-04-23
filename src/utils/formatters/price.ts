@@ -1,5 +1,9 @@
+const DEFAULT_FRACTION_DIGITS = 2;
+
 export const formatCryptoPrice = (
-  value: string | number | null | undefined
+  value: string | number | null | undefined,
+  minimumFractionDigits?: number,
+  maximumFractionDigits?: number,
 ): string | undefined => {
   if (value === null || value === undefined || value === "") return undefined;
 
@@ -7,20 +11,22 @@ export const formatCryptoPrice = (
 
   if (isNaN(price)) return undefined;
 
-  let fractionDigits = 2;
+  if (!maximumFractionDigits) {
+    if (price < 1) {
+      const strValue = value.toString();
+      const parts = strValue.split('.');
 
-  if (price < 1) {
-    const strValue = value.toString();
-    const parts = strValue.split('.');
+      maximumFractionDigits = parts.length > 1 ? parts[1].length : 0;
 
-    fractionDigits = parts.length > 1 ? parts[1].length : 0;
-
-    fractionDigits = Math.min(fractionDigits, 10);
+      maximumFractionDigits = Math.min(DEFAULT_FRACTION_DIGITS, 10);
+    } else {
+      maximumFractionDigits = DEFAULT_FRACTION_DIGITS;
+    }
   }
 
   return new Intl.NumberFormat('en-US', {
     style: 'decimal',
-    minimumFractionDigits: fractionDigits,
-    maximumFractionDigits: fractionDigits,
+    minimumFractionDigits: minimumFractionDigits || maximumFractionDigits,
+    maximumFractionDigits: maximumFractionDigits,
   }).format(price);
 };

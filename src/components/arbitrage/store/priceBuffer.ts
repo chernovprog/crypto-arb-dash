@@ -32,6 +32,7 @@ class PriceBuffer {
   public stop() {
     this.isRunning = false;
     this.buffer = {};
+    usePriceStore.getState().clearPrices();
   }
 }
 

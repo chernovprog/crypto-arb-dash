@@ -6,6 +6,7 @@ import type { Ticker } from "@/types";
 interface CryptoState {
   prices: Map<string, Map<number, Ticker>>;
   updateBulkPrices: (updates: Record<string, Record<number, Ticker>>) => void;
+  clearPrices: () => void;
 }
 
 export const usePriceStore = create<CryptoState>()(
@@ -40,5 +41,8 @@ export const usePriceStore = create<CryptoState>()(
           });
         });
       }),
+
+    clearPrices: () =>
+      set((state) => state.prices.clear()),
   }))
 );

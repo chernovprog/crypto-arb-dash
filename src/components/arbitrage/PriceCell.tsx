@@ -1,9 +1,10 @@
 import { memo, useMemo } from "react";
 
-import { Skeleton, Tooltip, Typography } from "@mui/material";
+import { Tooltip, Typography } from "@mui/material";
 import { format } from "date-fns";
 
 import { usePriceStore } from "@/components/arbitrage/store/usePriceStore";
+import SkeletonTableCell from "@/components/common/SkeletonTableCell";
 import { formatCryptoPrice } from "@/utils/formatters/price";
 
 import type { Ticker } from "@/types";
@@ -30,18 +31,8 @@ const PriceCell = memo(({
     (state) => state.prices.get(exchange)?.get(baseCurrencyId)
   );
 
-  if (!ticker) {
-    return (
-      <Skeleton
-        variant="rectangular"
-        sx={{
-          display: 'inline-block',
-          width: '100px',
-          height: '1.2em',
-          borderRadius: '4px',
-        }}
-      />
-    );
+  if (!ticker?.price) {
+    return <SkeletonTableCell width={100} />;
   }
 
   return (
@@ -55,7 +46,7 @@ const PriceCell = memo(({
           color: ticker.priceDirection === 'down' ? 'down.main' : 'up.main',
         }}
       >
-        {formatCryptoPrice(ticker?.price) || '---'}
+        {formatCryptoPrice(ticker.price) || '---'}
       </Typography>
     </Tooltip>
   );

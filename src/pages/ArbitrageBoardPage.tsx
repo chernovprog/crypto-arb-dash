@@ -13,7 +13,10 @@ import {
 } from "@mui/material";
 
 import ExchangeSubscriber from "@/components/arbitrage/ExchangeSubscriber";
+import MaxSpread from "@/components/arbitrage/MaxSpread";
 import PriceCell from "@/components/arbitrage/PriceCell";
+import { priceBuffer } from "@/components/arbitrage/store/priceBuffer";
+import { spreadCalculator } from "@/services/SpreadCalculator";
 import stompClient from "@/services/stompClient";
 import { useAppMetadataStore } from "@/store/useAppMetadataStore";
 
@@ -42,13 +45,24 @@ const ArbitrageBoardPage = () => {
     };
   }, []);
 
+  useEffect(() => {
+    priceBuffer.start();
+    spreadCalculator.start();
+    return () => {
+      priceBuffer.stop();
+      spreadCalculator.stop();
+    }
+  }, []);
+
   return (
     <Container maxWidth="lg" sx={{ my: { xs: 2, sm: 4, md: 6 } }}>
       <TableContainer>
         <Table
           sx={{
             borderCollapse: 'separate',
-            minWidth: 650,
+            minWidth: 600,
+            width: 'auto',
+            mx: 'auto',
             '& .MuiTableCell-root': {
               borderBottom: (theme) => `0.1px solid ${theme.vars.palette.tableBorder.main}`,
               borderRadius: '0 !important',
@@ -82,6 +96,13 @@ const ArbitrageBoardPage = () => {
                   />
                 </TableCell>
               ))}
+
+              <TableCell
+                align="right"
+                sx={{ minWidth: 150 }}
+              >
+                Max Spread %
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -111,7 +132,7 @@ const ArbitrageBoardPage = () => {
                   <TableCell
                     key={exchSub.exchangeName}
                     align="right"
-                    sx={{ width: '150px' }}
+                    sx={{ width: 150 }}
                   >
                     <PriceCell
                       exchange={exchSub.exchangeName}
@@ -119,6 +140,12 @@ const ArbitrageBoardPage = () => {
                     />
                   </TableCell>
                 ))}
+
+                <TableCell align="right">
+                  <MaxSpread
+                    baseCurrencyId={baseCurrencyId}
+                  />
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

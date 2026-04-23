@@ -2,7 +2,6 @@ import { useEffect } from "react";
 
 import { Client } from "@stomp/stompjs";
 
-
 import { priceBuffer } from "@/components/arbitrage/store/priceBuffer";
 import { isValidTicker, mapTickerDtoToModel } from "@/utils/ticker.util";
 
@@ -22,8 +21,6 @@ const ExchangeSubscriber = ({
   isConnected
 }: ExchangeSubscriberProps) => {
   useEffect(() => {
-    priceBuffer.start();
-
     let subscription: StompSubscription;
 
     if (isConnected && stompClient.connected) {
