@@ -37,13 +37,13 @@ const MaxSpread = ({ baseCurrencyId }: MaxSpreadProps) => {
         color="text.secondary"
         sx={{
           position: 'absolute',
-          bottom: -12,
+          bottom: -10,
           right: 0,
           fontSize: '0.65rem',
           lineHeight: 1,
         }}
       >
-        {formatCryptoPrice(amount, 4, 4)}
+        ${formatCryptoPrice(amount, 4, 4)}
       </Typography>
     </Stack>
   );
