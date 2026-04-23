@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Client } from "@stomp/stompjs";
 
 import { priceBuffer } from "@/services/priceBuffer";
-import { isValidTicker, mapTickerDtoToModel } from "@/utils/ticker.util";
+import { isTickerValid, mapTickerDtoToModel } from "@/utils/ticker.util";
 
 import type { IMessage, StompSubscription } from "@stomp/stompjs";
 
@@ -27,8 +27,8 @@ const ExchangeSubscriber = ({
       subscription = stompClient.subscribe(topic, (message: IMessage) => {
         const data = JSON.parse(message.body);
 
-        if (isValidTicker(data)) {
-          const ticker = mapTickerDtoToModel(data);
+        const ticker = mapTickerDtoToModel(data);
+        if (isTickerValid(ticker)) {
           priceBuffer.add(exchangeName, ticker);
         }
       });

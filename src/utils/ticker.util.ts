@@ -1,22 +1,22 @@
 import type { Ticker, TickerDto } from "@/types";
 
-export const mapTickerDtoToModel = (dto: TickerDto): Ticker => ({
-  currencyId: dto.id,
-  price: dto.p,
-  priceDirection: undefined,
-  timestamp: dto.t,
-});
+export const mapTickerDtoToModel = (dto: TickerDto): Ticker => {
+  const price = parseFloat(dto.p);
 
-export const isValidTicker = (data: unknown): data is TickerDto => {
-  if (typeof data !== 'object' || data === null) {
-    return false;
-  }
+  return {
+    currencyId: dto.id,
+    price: isNaN(price) ? 0 : price,
+    timestamp: dto.t,
+    priceDirection: undefined,
+  };
+};
 
-  const d = data as Record<string, unknown>;
+export const isTickerValid = (ticker: Ticker): boolean => {
+  if (!ticker) return false;
 
   return (
-    typeof d.id === 'number' && d.id >= 0 &&
-    typeof d.p === 'string' && d.p.trim() !== '' &&
-    typeof d.t === 'number'
+    ticker.currencyId > 0 &&
+    ticker.price > 0 &&
+    ticker.timestamp > 0
   );
 };

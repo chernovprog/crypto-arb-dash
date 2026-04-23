@@ -28,12 +28,10 @@ export const usePriceStore = create<CryptoState>()(
             const prevTicker = exchangeMap.get(id);
 
             if (prevTicker) {
-              const prevPrice = parseFloat(prevTicker.price);
-              const currentPrice = parseFloat(newTicker.price);
-
-              newTicker.priceDirection = currentPrice > prevPrice
+              newTicker.priceDirection = newTicker.price > prevTicker.price
                 ? 'up'
-                : currentPrice < prevPrice ? 'down'
+                : newTicker.price < prevTicker.price
+                  ? 'down'
                   : prevTicker.priceDirection;
             }
 

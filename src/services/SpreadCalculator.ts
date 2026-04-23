@@ -35,11 +35,11 @@ class SpreadCalculator {
 
       for (const exchangeName of exchangeNames) {
         const ticker = prices.get(exchangeName)?.get(baseCurrency);
-        const priceNum = ticker?.price ? parseFloat(ticker.price) : NaN;
+        const price = ticker?.price;
 
-        if (!isNaN(priceNum)) {
-          if (priceNum < minPrice) minPrice = priceNum;
-          if (priceNum > maxPrice) maxPrice = priceNum;
+        if (price) {
+          if (price < minPrice) minPrice = price;
+          if (price > maxPrice) maxPrice = price;
           foundPrices++;
         }
       }

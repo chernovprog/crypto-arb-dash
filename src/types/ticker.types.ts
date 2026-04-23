@@ -19,7 +19,7 @@ export type PriceDirection = 'up' | 'down' | undefined;
 
 export interface Ticker {
   currencyId: number;
-  price: string;
-  priceDirection: PriceDirection
+  price: number;
   timestamp: number;
+  priceDirection: PriceDirection
 }
