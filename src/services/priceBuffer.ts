@@ -1,4 +1,4 @@
-import { usePriceStore } from "@/components/arbitrage/store/usePriceStore";
+import { usePriceStore } from "@/store/arbitrage/usePriceStore";
 
 import type { Ticker } from "@/types";
 

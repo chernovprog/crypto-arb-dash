@@ -1,6 +1,6 @@
-import { usePriceStore } from "@/components/arbitrage/store/usePriceStore";
+import { usePriceStore } from "@/store/arbitrage/usePriceStore";
+import { type Spread, useSpreadStore } from "@/store/arbitrage/useSpreadStore";
 import { useAppMetadataStore } from "@/store/useAppMetadataStore";
-import { type Spread, useSpreadStore } from "@/store/useSpreadStore";
 
 class SpreadCalculator {
   private readonly timeout: number;

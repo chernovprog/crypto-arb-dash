@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 import { Client } from "@stomp/stompjs";
 
-import { priceBuffer } from "@/components/arbitrage/store/priceBuffer";
+import { priceBuffer } from "@/services/priceBuffer";
 import { isValidTicker, mapTickerDtoToModel } from "@/utils/ticker.util";
 
 import type { IMessage, StompSubscription } from "@stomp/stompjs";

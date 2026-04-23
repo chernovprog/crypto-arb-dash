@@ -15,7 +15,7 @@ import {
 import ExchangeSubscriber from "@/components/arbitrage/ExchangeSubscriber";
 import MaxSpread from "@/components/arbitrage/MaxSpread";
 import PriceCell from "@/components/arbitrage/PriceCell";
-import { priceBuffer } from "@/components/arbitrage/store/priceBuffer";
+import { priceBuffer } from "@/services/priceBuffer";
 import { spreadCalculator } from "@/services/SpreadCalculator";
 import stompClient from "@/services/stompClient";
 import { useAppMetadataStore } from "@/store/useAppMetadataStore";

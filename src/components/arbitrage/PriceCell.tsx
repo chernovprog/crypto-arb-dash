@@ -3,8 +3,8 @@ import { memo, useMemo } from "react";
 import { Tooltip, Typography } from "@mui/material";
 import { format } from "date-fns";
 
-import { usePriceStore } from "@/components/arbitrage/store/usePriceStore";
 import SkeletonTableCell from "@/components/common/SkeletonTableCell";
+import { usePriceStore } from "@/store/arbitrage/usePriceStore";
 import { formatCryptoPrice } from "@/utils/formatters/price";
 
 import type { Ticker } from "@/types";

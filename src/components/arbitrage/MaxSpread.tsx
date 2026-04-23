@@ -1,7 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 
 import SkeletonTableCell from "@/components/common/SkeletonTableCell";
-import { useSpreadStore } from "@/store/useSpreadStore";
+import { useSpreadStore } from "@/store/arbitrage/useSpreadStore";
 import { formatCryptoPrice } from "@/utils/formatters/price";
 
 interface MaxSpreadProps {
