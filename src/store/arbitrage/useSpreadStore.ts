@@ -4,6 +4,7 @@ import { immer } from "zustand/middleware/immer";
 export interface Spread {
   amount: number;
   percentage: number;
+  updatedAt: number;
 }
 
 interface SpreadState {

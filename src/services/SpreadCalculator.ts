@@ -49,7 +49,14 @@ class SpreadCalculator {
       const amount = maxPrice - minPrice;
       const percentage = (amount / minPrice) * 100;
 
-      updates.set(baseCurrency, { amount, percentage });
+      updates.set(
+        baseCurrency,
+        {
+          amount,
+          percentage,
+          updatedAt: Date.now(),
+        }
+      );
     }
 
     if (updates.size > 0) {

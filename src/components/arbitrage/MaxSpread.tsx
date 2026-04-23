@@ -1,5 +1,6 @@
-import { Stack, Typography } from "@mui/material";
+import { Stack, Tooltip, Typography } from "@mui/material";
 
+import CellTime from "@/components/arbitrage/CellTime";
 import SkeletonTableCell from "@/components/common/SkeletonTableCell";
 import { useSpreadStore } from "@/store/arbitrage/useSpreadStore";
 import { formatCryptoPrice } from "@/utils/formatters/price";
@@ -15,7 +16,7 @@ const MaxSpread = ({ baseCurrencyId }: MaxSpreadProps) => {
     return <SkeletonTableCell width={100} />;
   }
 
-  const { amount, percentage } = spread;
+  const { amount, percentage, updatedAt } = spread;
 
   return (
     <Stack
@@ -23,14 +24,16 @@ const MaxSpread = ({ baseCurrencyId }: MaxSpreadProps) => {
       alignItems="flex-end"
       sx={{ position: 'relative', minHeight: '1.2em' }}
     >
-      <Typography
-        component="span"
-        variant="body2"
-        fontWeight="medium"
-        color="up.main"
-      >
-        {formatCryptoPrice(percentage, 2, 2)}%
-      </Typography>
+      <Tooltip title={<CellTime timestamp={updatedAt} />}>
+        <Typography
+          component="span"
+          variant="body2"
+          fontWeight="medium"
+          color="up.main"
+        >
+          {formatCryptoPrice(percentage, 2, 2)}%
+        </Typography>
+      </Tooltip>
 
       <Typography
         component="span"
@@ -38,7 +41,7 @@ const MaxSpread = ({ baseCurrencyId }: MaxSpreadProps) => {
         color="text.secondary"
         sx={{
           position: 'absolute',
-          bottom: -10,
+          bottom: -11,
           right: 0,
           fontSize: '0.65rem',
           lineHeight: 1,
