@@ -1,4 +1,6 @@
-const DEFAULT_FRACTION_DIGITS = 2;
+const DEFAULT_NUMBER_DIGITS_AFTER_DECIMAL_POINT = 2;
+const MAX_NUMBER_DIGITS_AFTER_DECIMAL_POINT = 10;
+const MAX_NUMBER_DIGITS_AFTER_NON_ZERO_DIGIT_DECIMAL_PART = 4;
 
 export const formatCryptoPrice = (
   value: string | number | null | undefined,
@@ -12,21 +14,29 @@ export const formatCryptoPrice = (
   if (isNaN(price)) return undefined;
 
   if (!maximumFractionDigits) {
-    if (price < 1) {
-      const strValue = value.toString();
-      const parts = strValue.split('.');
-
-      maximumFractionDigits = parts.length > 1 ? parts[1].length : 0;
-
-      maximumFractionDigits = Math.min(DEFAULT_FRACTION_DIGITS, 10);
+    if (price >= 1) {
+      maximumFractionDigits = DEFAULT_NUMBER_DIGITS_AFTER_DECIMAL_POINT;
     } else {
-      maximumFractionDigits = DEFAULT_FRACTION_DIGITS;
+      const strValue = value.toString();
+      const decimalPart = strValue.split('.')[1];
+
+      let firstNonZeroDigitIndex = 0;
+      for (let i = 0; i < decimalPart.length; i++) {
+        if (decimalPart.charAt(i) !== '0') {
+          firstNonZeroDigitIndex = i;
+          break;
+        }
+      }
+
+      maximumFractionDigits = firstNonZeroDigitIndex + MAX_NUMBER_DIGITS_AFTER_NON_ZERO_DIGIT_DECIMAL_PART;
+
+      maximumFractionDigits = Math.min(maximumFractionDigits, MAX_NUMBER_DIGITS_AFTER_DECIMAL_POINT);
     }
   }
 
   return new Intl.NumberFormat('en-US', {
     style: 'decimal',
-    minimumFractionDigits: minimumFractionDigits || maximumFractionDigits,
+    minimumFractionDigits: minimumFractionDigits ?? DEFAULT_NUMBER_DIGITS_AFTER_DECIMAL_POINT,
     maximumFractionDigits: maximumFractionDigits,
   }).format(price);
 };
