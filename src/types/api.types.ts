@@ -24,3 +24,20 @@ export interface AppMetadata {
   currencySubscriptionsDto?: Record<number, CurrencyDto>;
   uiConfig?: UiConfigDto;
 }
+
+export interface CurrencyShortInfoDto {
+  name: string;
+  symbol: string;
+  price: number;
+  percentChange1h: number;
+  percentChange24h: number;
+  percentChange7d: number;
+  marketCap: number;
+  volume24h: number;
+}
+
+export interface MarketDataView {
+  data: CurrencyShortInfoDto[];
+  quoteCurrency: string;
+  timestamp: number;
+}

@@ -10,6 +10,7 @@ import LoginPage from "@/pages/Auth/LoginPage.tsx";
 import ResetPasswordPage from "@/pages/Auth/ResetPasswordPage";
 import SignupPage from "@/pages/Auth/SignupPage.tsx";
 import HomePage from "@/pages/HomePage";
+import MarketDashboard from "@/pages/MarketDashboard";
 
 import NotFoundPage from "./pages/NotFoundPage.tsx";
 
@@ -30,6 +31,7 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route element={<ProtectedRoute />}>
+            <Route path="/markets" element={<MarketDashboard />} />
             <Route path="/arbitrage" element={<ArbitrageBoardPage />} />
           </Route>
         </Route>
